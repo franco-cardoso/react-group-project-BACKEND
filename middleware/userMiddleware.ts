@@ -1,4 +1,5 @@
 import { User, UserType } from "../models/User";
+import { decodeToken } from "../services/authService";
 
 const isValidUser = async (req, res, next) => {
     const { email, password, name, surname }: UserType = req.body;
@@ -20,4 +21,16 @@ const isValidUser = async (req, res, next) => {
     next();
 };
 
-export { isValidUser };
+const isAuth = async (req, res, next) => {
+    if (!req.headers.authorization) return res.status(401).send("Debes iniciar sesión");
+    const token = req.headers.authorization.split(" ")[1];
+
+    const decodedToken = await decodeToken(token);
+
+    if (!decodedToken.id) return res.status(403).send("El token ha expirado");
+    else req.user = decodedToken.id;
+
+    next();
+};
+
+export { isAuth, isValidUser };

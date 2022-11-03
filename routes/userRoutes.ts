@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, login, register } from "../controllers/userControllers";
-import { isValidUser } from "../middleware/userMiddleware";
+import { isAuth, isValidUser } from "../middleware/userMiddleware";
 
 const userRouter = express.Router();
 
