@@ -1,5 +1,5 @@
 import { User, UserType } from "../models/User";
-import { registerNewUser } from "../services/userServices";
+import { attemptLogin, registerNewUser } from "../services/userServices";
 
 const getUsers = (req, res) => {
     try {
@@ -16,12 +16,18 @@ const getUsers = (req, res) => {
             res.status(200).json(usersList);
         });
     } catch (err) {
-        res.status(500).send({ message: "internal server error", error: err });
+        res.status(500).send({ message: "Ocurrió un error en el servidor", error: err });
     }
 };
 
 const login = (req, res) => {
-    res.send("test");
+    try {
+        attemptLogin(req.body, (response) => {
+            res.status(response.status).send(response);
+        });
+    } catch (err) {
+        res.status(500).send({ message: "Ocurrió un error al iniciar sesión", error: err });
+    }
 };
 
 const register = (req, res) => {
