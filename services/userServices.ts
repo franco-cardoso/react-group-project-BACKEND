@@ -1,17 +1,16 @@
 import { User, UserType } from "../models/User";
+import { createToken } from "./authService";
 
 const registerNewUser = (user: UserType, result) => {
     const newUser = new User(user);
-    try {
-        newUser.save((err) => {
-            if (err) throw err;
-            return result({ message: "Usuario creado con éxito", status: 200 });
-        });
-    } catch (err) {
-        console.log(err);
-        return result({ message: "Ocurrió un error al crear el usuario", status: 500, error: err });
-    }
+    newUser.save((err) => {
+        if (err) throw err;
+        return result({ message: "Usuario creado con éxito", token: createToken(newUser), status: 200 });
+    });
 };
 
+const attemptLogin = () => {
+    
+}
 
-export { registerNewUser };
+export { registerNewUser, attemptLogin };
