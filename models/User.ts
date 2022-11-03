@@ -2,12 +2,12 @@ import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt-nodejs";
 
 export interface UserType {
-    _id: string;
+    _id?: string;
     name: string;
     surname: string;
     email: string;
     password: string;
-    date: Date;
+    date?: Date;
 }
 
 const UserSchema = new Schema<UserType>({
@@ -19,11 +19,11 @@ const UserSchema = new Schema<UserType>({
 });
 
 UserSchema.pre("save", function (next) {
-    const user = this;
+    const user: UserType = this;
     try {
         bcrypt.genSalt(10, (err, salt) => {
             if (err) throw err;
-            bcrypt.hash(user.password, salt, (err, hash) => {
+            bcrypt.hash(user.password, salt, null, (err, hash) => {
                 if (err) throw err;
                 user.password = hash;
             });

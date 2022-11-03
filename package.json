@@ -4,6 +4,7 @@
   "description": "Back-end code for react-group-project using Express and MongoDB",
   "main": "index.ts",
   "scripts": {
+    "start":"nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
