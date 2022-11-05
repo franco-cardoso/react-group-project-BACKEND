@@ -1,5 +1,5 @@
 import { User, UserType } from "../models/User";
-import { attemptLogin, registerNewUser } from "../services/userServices";
+import { attemptLogin, getUser, registerNewUser } from "../services/userServices";
 
 const getUsers = (req, res) => {
     try {
@@ -18,6 +18,12 @@ const getUsers = (req, res) => {
     } catch (err) {
         res.status(500).send({ message: "Ocurrió un error en el servidor", error: err });
     }
+};
+
+const getUserById = (req, res) => {
+    getUser(req.user, (result) => {
+        if (result.user) res.status(result.status).json(result.user);
+    });
 };
 
 const login = (req, res) => {
@@ -39,4 +45,4 @@ const register = (req, res) => {
     }
 };
 
-export { getUsers, login, register };
+export { getUsers, getUserById, login, register };

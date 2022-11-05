@@ -2,8 +2,11 @@ require("dotenv").config();
 import express from "express";
 import { router } from "./routes/router";
 import mongoose from "mongoose";
+import cors from "cors";
 
 const app = express();
+
+app.use(cors({ origin: "*" }));
 
 app.use(express.json());
 
@@ -15,4 +18,3 @@ mongoose.connect(process.env.MONGO_DB, (err) => {
     app.listen(process.env.PORT);
     console.log("server listening...");
 });
-

@@ -29,7 +29,7 @@ const isAuth = async (req, res, next) => {
 
     if (!decodedToken.id) return res.status(403).send("El token ha expirado");
     else req.user = decodedToken.id;
-
+    console.log(token)
     next();
 };
 
