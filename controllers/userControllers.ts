@@ -21,9 +21,13 @@ const getUsers = (req, res) => {
 };
 
 const getUserById = (req, res) => {
-    getUser(req.user, (result) => {
-        if (result.user) res.status(result.status).json(result.user);
-    });
+    try {
+        getUser(req.user, (result) => {
+            if (result.user) res.status(result.status).json(result);
+        });
+    } catch (err) {
+        res.status(500).send({ message: "Ocurrió un error al consultar la base de datos", error: err });
+    }
 };
 
 const login = (req, res) => {
