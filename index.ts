@@ -11,6 +11,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 app.use("/api", router);
+app.get("/test", (req, res) => res.send("test"));
 
 mongoose.connect(process.env.MONGO_DB, (err) => {
     if (err) throw err;
@@ -18,3 +19,5 @@ mongoose.connect(process.env.MONGO_DB, (err) => {
     app.listen(process.env.PORT);
     console.log("server listening...");
 });
+
+export { app };
