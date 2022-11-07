@@ -6,12 +6,11 @@ import cors from "cors";
 
 const app = express();
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "https://premiumbakery.vercel.app/" }));
 
 app.use(express.json());
 
 app.use("/api", router);
-app.get("/test", (req, res) => res.send("test"));
 
 mongoose.connect(process.env.MONGO_DB, (err) => {
     if (err) throw err;
