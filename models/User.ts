@@ -10,13 +10,16 @@ export interface UserType {
     date?: Date;
 }
 
-const UserSchema = new Schema<UserType>({
-    name: { type: String, required: true },
-    surname: { type: String, required: true },
-    email: { type: String, required: true, lowercase: true, unique: true },
-    password: { type: String, required: true },
-    date: { type: Date, default: Date.now() },
-});
+const UserSchema = new Schema<UserType>(
+    {
+        name: { type: String, required: true },
+        surname: { type: String, required: true },
+        email: { type: String, required: true, lowercase: true, unique: true },
+        password: { type: String, required: true },
+        date: { type: Date, default: Date.now() },
+    },
+    { collection: "users" }
+);
 
 UserSchema.pre("save", function (next) {
     const user: UserType = this;
