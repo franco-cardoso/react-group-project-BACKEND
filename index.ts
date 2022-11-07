@@ -20,4 +20,6 @@ mongoose.connect(process.env.MONGO_DB, (err) => {
     console.log("server listening...");
 });
 
-export { app };
+console.log(process.env.MONGO_DB);
+
+export default app;
