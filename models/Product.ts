@@ -1,11 +1,5 @@
 import { Schema, model } from "mongoose";
-
-export interface ProductType {
-    img: string;
-    title: string;
-    price: number;
-    category: string;
-}
+import { ProductType } from "../misc/types";
 
 const ProductSchema = new Schema<ProductType>(
     {
@@ -17,5 +11,5 @@ const ProductSchema = new Schema<ProductType>(
     { collection: "products" }
 );
 
-const Product = model("Product", ProductSchema);
+const Product = model<ProductType>("Product", ProductSchema);
 export { Product };

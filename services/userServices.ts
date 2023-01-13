@@ -1,4 +1,4 @@
-import { compareSync } from "bcrypt-nodejs";
+import bcrypt from "bcrypt";
 import { ObjectId } from "mongoose";
 import { User, UserType } from "../models/User";
 import { createToken } from "./authService";
@@ -27,7 +27,7 @@ const attemptLogin = (credentials: { email: string; password: string }, resCallb
     User.findOne({ email: email }, (err, user) => {
         if (err) throw err;
         if (!user) return resCallback({ message: "El correo o la contraseña son incorrectos", status: 400 });
-        if (!(password && compareSync(password, user.password))) {
+        if (!(password && bcrypt.compareSync(password, user.password))) {
             return resCallback({ message: "El correo o la contraseña son incorrectos", status: 400 });
         }
 
