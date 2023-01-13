@@ -5,13 +5,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 
 const app = express();
-
 app.use(cors({ origin: process.env.CORS_ORIGIN }));
-
 app.use(express.json());
 
 app.use("/api", router);
-app.get("/test",(req,res) => res.send("test"))
 
 mongoose.connect(process.env.MONGO_DB, (err) => {
     if (err) throw err;
