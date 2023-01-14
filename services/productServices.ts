@@ -6,8 +6,8 @@ import { CallbackError, HydratedDocument } from "mongoose";
 const getAllProducts = (): Promise<PromiseType> => {
     return new Promise((res, rej) => {
         try {
-            Product.find({}, (err, products: HydratedDocument<ProductType>) => {
-                if (err) throw new Error(err);
+            Product.find({}, (err: CallbackError, products: HydratedDocument<ProductType>) => {
+                if (err) throw err;
                 res({ data: products, status: 200 });
             });
         } catch (err) {
