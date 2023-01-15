@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { ObjectId } from "mongoose";
 import { User, UserType } from "../models/User";
 import { createToken } from "./authService";
