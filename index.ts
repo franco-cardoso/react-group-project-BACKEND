@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGO_DB, (err) => {
     if (err) throw err;
     console.log("connected to database");
     app.listen(process.env.PORT);
-    console.log("server listening...");
+    console.log("server listening on port " + process.env.PORT);
 });
 
 export default app;
